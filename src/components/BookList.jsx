@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Card, Col } from "react-bootstrap";
+import styled from "styled-components";
 
 import BookListItem from "./BookListItem";
 import { booksLoaded } from "../actions";
@@ -17,18 +19,23 @@ class BookList extends Component {
   render() {
     const { books } = this.props;
     return (
-      <ul>
+      <Col sm={9}>
         {books.map((book) => {
           return (
-            <li key={book.id}>
+            <StyledCard key={book.id}>
               <BookListItem book={book} />
-            </li>
+            </StyledCard>
           );
         })}
-      </ul>
+      </Col>
     );
   }
 }
+
+const StyledCard = styled(Card)`
+  flex-direction: row;
+  margin: 1rem;
+`;
 
 const mapStateToProps = ({ books }) => {
   return { books };
