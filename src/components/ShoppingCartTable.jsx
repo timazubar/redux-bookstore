@@ -1,12 +1,53 @@
 import React from "react";
 import { Button, Container, Table } from "react-bootstrap";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
-const ShoppingCartTable = () => {
+const ShoppingCartTable = ({
+  items,
+  total,
+  onIncrease,
+  onDecrease,
+  onDelete,
+}) => {
+  const renderRow = (item, idx) => {
+    const { id, name, count, total } = item;
+    return (
+      <tr key={id}>
+        <td>{idx + 1}</td>
+        <td>{name}</td>
+        <td>{count}</td>
+        <td>${total}</td>
+        <StyledTd>
+          <StyledCartButton
+            variant="outline-success"
+            size="sm"
+            onClick={() => onIncrease(id)}
+          >
+            <i className="fa fa-plus-square"></i>
+          </StyledCartButton>
+          <StyledCartButton
+            variant="outline-warning"
+            size="sm"
+            onClick={() => onDecrease(id)}
+          >
+            <i className="fa fa-minus-square"></i>
+          </StyledCartButton>
+          <StyledCartButton
+            variant="outline-danger"
+            size="sm"
+            onClick={() => onDelete(id)}
+          >
+            <i className="fa fa-trash-o"></i>
+          </StyledCartButton>
+        </StyledTd>
+      </tr>
+    );
+  };
   return (
     <Container>
       <h2>Your order</h2>
-      <Table striped bordered hover>
+      <Table bordered hover>
         <thead>
           <tr>
             <th>#</th>
@@ -16,27 +57,9 @@ const ShoppingCartTable = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>1984</td>
-            <td>2</td>
-            <td>$30</td>
-            <StyledTd>
-              <StyledCartButton variant="outline-success" size="sm">
-                <i className="fa fa-plus-square"></i>
-              </StyledCartButton>
-              <StyledCartButton variant="outline-warning" size="sm">
-                <i className="fa fa-minus-square"></i>
-              </StyledCartButton>
-              <StyledCartButton variant="outline-danger" size="sm">
-                <i className="fa fa-trash-o"></i>
-              </StyledCartButton>
-            </StyledTd>
-          </tr>
-        </tbody>
+        <tbody>{items.map(renderRow)}</tbody>
       </Table>
-      <StyledCartTotal>Total: $200</StyledCartTotal>
+      <StyledCartTotal>Total: ${total}</StyledCartTotal>
     </Container>
   );
 };
@@ -54,4 +77,25 @@ const StyledTd = styled.td`
   display: flex;
 `;
 
-export default ShoppingCartTable;
+const mapStateToProps = ({ cartItems, orderTotal }) => {
+  return {
+    items: cartItems,
+    total: orderTotal,
+  };
+};
+
+const mapDispatchToProps = () => {
+  return {
+    onIncrease: (id) => {
+      console.log(`Increase ${id}`);
+    },
+    onDecrease: (id) => {
+      console.log(`Decrease ${id}`);
+    },
+    onDelete: (id) => {
+      console.log(`Delete ${id}`);
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);
