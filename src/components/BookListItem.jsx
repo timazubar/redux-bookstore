@@ -3,10 +3,10 @@ import { Button, Container, Image } from "react-bootstrap";
 import styled from "styled-components";
 
 const BookListItem = ({ book }) => {
-  const { title, author, price, image } = book;
+  const { title, author, price, coverImage } = book;
   return (
     <Fragment>
-      <StyledImage src={image} rounded />
+      <StyledImage src={coverImage} rounded />
       <StyledTextContainer>
         <StyledTitle>{title}</StyledTitle>
         <StyledAuthor>{author}</StyledAuthor>

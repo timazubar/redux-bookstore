@@ -4,20 +4,25 @@ import { Card, Col } from "react-bootstrap";
 import styled from "styled-components";
 
 import BookListItem from "./BookListItem";
-import { booksLoaded } from "../actions";
+import { booksLoaded, booksRequested } from "../actions";
 import { compose } from "../utils";
+import Spinner from "./Spinner";
 import withBookstoreService from "./withBookstoreService";
 
 class BookList extends Component {
   componentDidMount() {
-    const { bookstoreService } = this.props;
-    const data = bookstoreService.getBooks();
-
-    this.props.booksLoaded(data);
+    const { bookstoreService, booksLoaded, booksRequested } = this.props;
+    booksRequested();
+    bookstoreService.getBooks().then((data) => booksLoaded(data));
   }
 
   render() {
-    const { books } = this.props;
+    const { books, loading } = this.props;
+
+    if (loading) {
+      return <Spinner />;
+    }
+
     return (
       <Col sm={9}>
         {books.map((book) => {
@@ -37,12 +42,13 @@ const StyledCard = styled(Card)`
   margin: 1rem;
 `;
 
-const mapStateToProps = ({ books }) => {
-  return { books };
+const mapStateToProps = ({ books, loading }) => {
+  return { books, loading };
 };
 
 const mapDispatchToProps = {
   booksLoaded,
+  booksRequested,
 };
 
 export default compose(

@@ -11,7 +11,7 @@ import withBookstoreService from "./withBookstoreService";
 const App = ({ bookstoreService }) => {
   return (
     <StyledMain>
-      <ShopHeader />
+      <ShopHeader numItems={2} total={35} />
       <Switch>
         <Route path="/" component={HomePage} exact />
         <Route path="/cart" component={CartPage} />
