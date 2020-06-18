@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Button, Container, Image } from "react-bootstrap";
 import styled from "styled-components";
 
-const BookListItem = ({ book }) => {
+const BookListItem = ({ book, onAddedToCart }) => {
   const { title, author, price, coverImage } = book;
   return (
     <Fragment>
@@ -13,7 +13,7 @@ const BookListItem = ({ book }) => {
       </StyledTextContainer>
       <StyledOrderContainer>
         <StyledPrice>{`$${price}`}</StyledPrice>
-        <Button>Add to cart</Button>
+        <Button onClick={onAddedToCart}>Add to cart</Button>
       </StyledOrderContainer>
     </Fragment>
   );
