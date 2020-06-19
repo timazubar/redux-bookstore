@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Card, Col } from "react-bootstrap";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Card, Col } from 'react-bootstrap';
+import styled from 'styled-components';
 
-import BookListItem from "./BookListItem";
-import { fetchBooks, bookAddedToCart } from "../actions";
-import { compose } from "../utils";
-import ErrorIndicator from "./ErrorIndicator";
-import Spinner from "./Spinner";
-import withBookstoreService from "./withBookstoreService";
+import BookListItem from './BookListItem';
+import { fetchBooks, bookAddedToCart } from '../actions';
+import { compose } from '../utils';
+import ErrorIndicator from './ErrorIndicator';
+import Spinner from './Spinner';
+import withBookstoreService from './withBookstoreService';
 
 const BookList = ({ books, onAddedToCart }) => {
   return (
     <Col sm={9}>
-      {books.map((book) => {
+      {books.map(book => {
         return (
           <StyledCard key={book.id}>
             <BookListItem
@@ -58,8 +58,8 @@ const mapStateToProps = ({ bookList: { books, loading, error } }) => {
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
-    fetchBooks: fetchBooks(bookstoreService, dispatch),
-    onAddedToCart: (id) => dispatch(bookAddedToCart(id)),
+    fetchBooks: () => dispatch(fetchBooks(bookstoreService)()),
+    onAddedToCart: id => dispatch(bookAddedToCart(id)),
   };
 };
 
