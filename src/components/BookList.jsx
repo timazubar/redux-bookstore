@@ -52,7 +52,7 @@ const StyledCard = styled(Card)`
   margin: 1rem;
 `;
 
-const mapStateToProps = ({ books, loading, error }) => {
+const mapStateToProps = ({ bookList: { books, loading, error } }) => {
   return { books, loading, error };
 };
 

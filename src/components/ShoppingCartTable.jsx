@@ -83,13 +83,7 @@ const StyledTd = styled.td`
   display: flex;
 `;
 
-const mapStateToProps = ({
-  cartItems,
-  orderTotal,
-  onIncrease,
-  onDecrease,
-  onDelete,
-}) => {
+const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal } }) => {
   return {
     items: cartItems,
     total: orderTotal,
