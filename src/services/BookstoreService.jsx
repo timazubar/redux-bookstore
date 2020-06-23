@@ -2,19 +2,27 @@ export default class BookstoreService {
   data = [
     {
       id: 1,
-      title: "1984",
-      author: "George Orwell",
+      title: 'The Black Swan: The Impact of the Highly Improbable',
+      author: 'Nassim Nicholas Taleb',
       price: 10,
       coverImage:
-        "https://images-na.ssl-images-amazon.com/images/I/31ijiaTuJzL._SX282_BO1,204,203,200_.jpg",
+        'https://images-na.ssl-images-amazon.com/images/I/41w4yuUG1mL._SX322_BO1,204,203,200_.jpg',
     },
     {
       id: 2,
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
+      title: 'Antifragile: Things That Gain from Disorder',
+      author: 'Nassim Nicholas Taleb',
+      price: 12,
+      coverImage:
+        'https://images-na.ssl-images-amazon.com/images/I/419QSJTZ+bL._SX322_BO1,204,203,200_.jpg',
+    },
+    {
+      id: 3,
+      title: 'Skin in the Game: Hidden Asymmetries in Daily Life',
+      author: 'Nassim Nicholas Taleb',
       price: 15,
       coverImage:
-        "https://images-na.ssl-images-amazon.com/images/I/51uLvJlKpNL._SX321_BO1,204,203,200_.jpg",
+        'https://images-na.ssl-images-amazon.com/images/I/41ObAlltSeL._SX328_BO1,204,203,200_.jpg',
     },
   ];
 
@@ -22,7 +30,7 @@ export default class BookstoreService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (Math.random() > 0.9) {
-          reject(new Error("err"));
+          reject(new Error('err'));
         } else {
           resolve(this.data);
         }
