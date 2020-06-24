@@ -13,8 +13,8 @@ const App = () => {
     <StyledMain>
       <ShopHeader numItems={0} total={0} />
       <Switch>
-        <Route path='/' component={HomePage} exact />
-        <Route path='/cart' component={CartPage} />
+        <Route path='/redux-bookstore' component={HomePage} exact />
+        <Route path='/redux-bookstore/cart' component={CartPage} />
       </Switch>
     </StyledMain>
   );

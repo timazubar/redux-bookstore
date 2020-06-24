@@ -7,8 +7,8 @@ import styled from 'styled-components';
 const ShopHeader = ({ itemsCount, itemsTotal }) => {
   return (
     <Header>
-      <HeaderTitle to='/'>Redux Bookstore</HeaderTitle>
-      <Cart to='/cart'>
+      <HeaderTitle to='/redux-bookstore'>Redux Bookstore</HeaderTitle>
+      <Cart to='/redux-bookstore/cart'>
         <i className='cart-iron fa fa-shopping-cart' />
         {itemsCount} items (${itemsTotal})
       </Cart>
