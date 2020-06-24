@@ -8,7 +8,7 @@ import HomePage from './Pages/HomePage';
 import ShopHeader from './ShopHeader';
 import withBookstoreService from './withBookstoreService';
 
-const App = ({ bookstoreService }) => {
+const App = () => {
   return (
     <StyledMain>
       <ShopHeader numItems={0} total={0} />

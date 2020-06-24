@@ -1,13 +1,13 @@
-import React from "react";
-import { Button, Container, Table } from "react-bootstrap";
-import { connect } from "react-redux";
-import styled from "styled-components";
+import React from 'react';
+import { Button, Col, Container, Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import {
   bookAddedToCart,
   bookRemovedFromCart,
   allBooksRemovedFromCart,
-} from "../actions";
+} from '../actions';
 
 const ShoppingCartTable = ({
   items,
@@ -25,33 +25,33 @@ const ShoppingCartTable = ({
         <td>{count}</td>
         <td>${total}</td>
         <StyledTd>
-          <StyledCartButton
-            variant="outline-success"
-            size="sm"
+          <CartButton
+            variant='outline-success'
+            size='sm'
             onClick={() => onIncrease(id)}
           >
-            <i className="fa fa-plus-square"></i>
-          </StyledCartButton>
-          <StyledCartButton
-            variant="outline-warning"
-            size="sm"
+            <i className='fa fa-plus-square'></i>
+          </CartButton>
+          <CartButton
+            variant='outline-warning'
+            size='sm'
             onClick={() => onDecrease(id)}
           >
-            <i className="fa fa-minus-square"></i>
-          </StyledCartButton>
-          <StyledCartButton
-            variant="outline-danger"
-            size="sm"
+            <i className='fa fa-minus-square'></i>
+          </CartButton>
+          <CartButton
+            variant='outline-danger'
+            size='sm'
             onClick={() => onDelete(id)}
           >
-            <i className="fa fa-trash-o"></i>
-          </StyledCartButton>
+            <i className='fa fa-trash-o'></i>
+          </CartButton>
         </StyledTd>
       </tr>
     );
   };
   return (
-    <Container>
+    <Col sm={5}>
       <h2>Your order</h2>
       <Table bordered hover>
         <thead>
@@ -65,16 +65,16 @@ const ShoppingCartTable = ({
         </thead>
         <tbody>{items.map(renderRow)}</tbody>
       </Table>
-      <StyledCartTotal>Total: ${total}</StyledCartTotal>
-    </Container>
+      <CartTotal>Total: ${total}</CartTotal>
+    </Col>
   );
 };
 
-const StyledCartButton = styled(Button)`
+const CartButton = styled(Button)`
   margin: 0.25rem;
 `;
 
-const StyledCartTotal = styled(Container)`
+const CartTotal = styled(Container)`
   text-align: right;
   font-size: 1.5em;
 `;

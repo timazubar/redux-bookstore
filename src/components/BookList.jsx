@@ -12,8 +12,8 @@ import withBookstoreService from './withBookstoreService';
 
 const BookList = ({ books, onAddedToCart }) => {
   return (
-    <Col sm={9}>
-      {books.map(book => {
+    <Wrapper sm={7}>
+      {books.map((book) => {
         return (
           <StyledCard key={book.id}>
             <BookListItem
@@ -23,7 +23,7 @@ const BookList = ({ books, onAddedToCart }) => {
           </StyledCard>
         );
       })}
-    </Col>
+    </Wrapper>
   );
 };
 
@@ -47,11 +47,6 @@ class BookListContainer extends Component {
   }
 }
 
-const StyledCard = styled(Card)`
-  flex-direction: row;
-  margin: 1rem;
-`;
-
 const mapStateToProps = ({ bookList: { books, loading, error } }) => {
   return { books, loading, error };
 };
@@ -59,9 +54,18 @@ const mapStateToProps = ({ bookList: { books, loading, error } }) => {
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
     fetchBooks: () => dispatch(fetchBooks(bookstoreService)()),
-    onAddedToCart: id => dispatch(bookAddedToCart(id)),
+    onAddedToCart: (id) => dispatch(bookAddedToCart(id)),
   };
 };
+
+const Wrapper = styled(Col)`
+  padding: 0;
+`;
+
+const StyledCard = styled(Card)`
+  flex-direction: row;
+  margin: 1rem;
+`;
 
 export default compose(
   withBookstoreService(),

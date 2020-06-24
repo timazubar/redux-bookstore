@@ -1,33 +1,41 @@
-import React from "react";
-import { Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-const ShopHeader = ({ numItems, total }) => {
+const ShopHeader = ({ itemsCount, itemsTotal }) => {
   return (
-    <StyledHeader>
-      <StyledTitle to="/">Redux Bookstore</StyledTitle>
-      <StyledCart to="/cart">
-        <i className="cart-iron fa fa-shopping-cart" />
-        {numItems} items (${total})
-      </StyledCart>
-    </StyledHeader>
+    <Header>
+      <HeaderTitle to='/'>Redux Bookstore</HeaderTitle>
+      <Cart to='/cart'>
+        <i className='cart-iron fa fa-shopping-cart' />
+        {itemsCount} items (${itemsTotal})
+      </Cart>
+    </Header>
   );
 };
 
-const StyledHeader = styled(Row)`
+const Header = styled(Row)`
   justify-content: space-between;
   margin: 0;
   font-size: 2rem;
 `;
 
-const StyledTitle = styled(Link)`
+const HeaderTitle = styled(Link)`
   font-weight: 700;
   color: black;
 `;
 
-const StyledCart = styled(Link)`
+const Cart = styled(Link)`
   color: black;
 `;
 
-export default ShopHeader;
+const mapStateToProps = ({ shopHeader: { numItems, total } }) => {
+  return {
+    itemsCount: numItems,
+    itemsTotal: total,
+  };
+};
+
+export default connect(mapStateToProps)(ShopHeader);

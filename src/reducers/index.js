@@ -5,6 +5,7 @@ const reducer = (state, action) => {
   return {
     bookList: updateBookList(state, action),
     shoppingCart: updateShoppingCart(state, action),
+    shopHeader: updateShoppingCart(state, action),
   };
 };
 

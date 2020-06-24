@@ -2,7 +2,7 @@ export default class BookstoreService {
   data = [
     {
       id: 1,
-      title: 'The Black Swan: The Impact of the Highly Improbable',
+      title: 'The Black Swan',
       author: 'Nassim Nicholas Taleb',
       price: 10,
       coverImage:
@@ -10,7 +10,7 @@ export default class BookstoreService {
     },
     {
       id: 2,
-      title: 'Antifragile: Things That Gain from Disorder',
+      title: 'Antifragile',
       author: 'Nassim Nicholas Taleb',
       price: 12,
       coverImage:
@@ -18,7 +18,7 @@ export default class BookstoreService {
     },
     {
       id: 3,
-      title: 'Skin in the Game: Hidden Asymmetries in Daily Life',
+      title: 'Skin in the Game',
       author: 'Nassim Nicholas Taleb',
       price: 15,
       coverImage:
