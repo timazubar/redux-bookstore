@@ -50,24 +50,29 @@ const ShoppingCartTable = ({
       </tr>
     );
   };
-  return (
-    <Col sm={5}>
-      <h2>Your order</h2>
-      <Table bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Item</th>
-            <th>Count</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>{items.map(renderRow)}</tbody>
-      </Table>
-      <CartTotal>Total: ${total}</CartTotal>
-    </Col>
-  );
+
+  if (items.length === 0) {
+    return null;
+  } else {
+    return (
+      <Col>
+        <h2>Your order</h2>
+        <Table bordered hover>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Item</th>
+              <th>Count</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{items.map(renderRow)}</tbody>
+        </Table>
+        <CartTotal>Total: ${total}</CartTotal>
+      </Col>
+    );
+  }
 };
 
 const CartButton = styled(Button)`
