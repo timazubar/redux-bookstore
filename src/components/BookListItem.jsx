@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react';
 import { Button, Container, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BookListItem = ({ book, onAddedToCart }) => {
-  const { title, author, price, coverImage } = book;
+  const { id, title, author, price, coverImage } = book;
   return (
     <Fragment>
       <StyledImage src={coverImage} rounded />
       <TextContainer>
-        <Title>{title}</Title>
+        <Title to={`/redux-bookstore/${id}`}>{title}</Title>
         <Author>{author}</Author>
       </TextContainer>
       <OrderContainer>
@@ -49,9 +50,10 @@ const Price = styled.span`
   color: tomato;
 `;
 
-const Title = styled.h3`
+const Title = styled(Link)`
   font-size: 2em;
   font-weight: 700;
+  color: black;
 `;
 
 export default BookListItem;

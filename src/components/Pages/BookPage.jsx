@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import BookListItem from './BookListItem';
-import { fetchBooks, bookAddedToCart } from '../actions';
-import { compose } from '../utils';
-import ErrorIndicator from './ErrorIndicator';
-import Spinner from './Spinner';
-import withBookstoreService from './withBookstoreService';
+import { fetchBooks, bookAddedToCart } from '../../actions';
+import BookListItem from '../BookListItem';
+import { compose } from '../../utils';
+import ErrorIndicator from '../ErrorIndicator';
+import Spinner from '../Spinner';
+import withBookstoreService from '../withBookstoreService';
 
-const BookList = ({ books, onAddedToCart }) => {
-  return (
-    <Wrapper sm={7}>
-      {books.map((book) => {
-        return (
-          <StyledCard key={book.id}>
-            <BookListItem
-              book={book}
-              onAddedToCart={() => onAddedToCart(book.id)}
-            />
-          </StyledCard>
-        );
-      })}
-    </Wrapper>
-  );
+const BookPage = ({ books, onAddedToCart }) => {
+  const renderBook = (bookId) => {
+    const book = books.find((book) => book.id === bookId);
+    return (
+      <StyledCard key={book.id}>
+        <BookListItem
+          bookId={bookId}
+          book={book}
+          onAddedToCart={() => onAddedToCart(book.id)}
+        />
+      </StyledCard>
+    );
+  };
+
+  return <>{renderBook(books[0].id)}</>;
 };
 
-class BookListContainer extends Component {
+class BookPageContainer extends Component {
   componentDidMount() {
     this.props.fetchBooks();
   }
@@ -43,13 +43,9 @@ class BookListContainer extends Component {
       return <ErrorIndicator />;
     }
 
-    return <BookList books={books} onAddedToCart={onAddedToCart} />;
+    return <BookPage books={books} onAddedToCart={onAddedToCart} />;
   }
 }
-
-const Wrapper = styled(Col)`
-  padding: 0;
-`;
 
 const StyledCard = styled(Card)`
   flex-direction: row;
@@ -70,4 +66,4 @@ const mapDispatchToProps = (dispatch, { bookstoreService }) => {
 export default compose(
   withBookstoreService(),
   connect(mapStateToProps, mapDispatchToProps)
-)(BookListContainer);
+)(BookPageContainer);
