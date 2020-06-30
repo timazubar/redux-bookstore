@@ -3,24 +3,23 @@ import { connect } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import { fetchBooks, bookAddedToCart, setSelectedBookId } from '../../actions';
+import { fetchBooks, bookAddedToCart } from '../../actions';
 import BookListItem from '../BookListItem';
 import { compose } from '../../utils';
 import ErrorIndicator from '../ErrorIndicator';
 import Spinner from '../Spinner';
 import withBookstoreService from '../withBookstoreService';
 
-const BookPage = ({ books, bookId, onAddedToCart, onSelectedBook }) => {
+const BookPage = ({ books, bookId, onAddedToCart }) => {
   const renderBook = (bookId) => {
     const book = books.find((book) => book.id === bookId);
-    console.log(bookId);
+    console.log(book);
     return (
       <StyledCard key={bookId}>
         <BookListItem
           bookId={bookId}
           book={book}
           onAddedToCart={() => onAddedToCart(book.id)}
-          onSelectedBook={() => onSelectedBook(book.id)}
         />
       </StyledCard>
     );
@@ -35,14 +34,7 @@ class BookPageContainer extends Component {
   }
 
   render() {
-    const {
-      bookId,
-      books,
-      loading,
-      error,
-      onAddedToCart,
-      onSelectedBook,
-    } = this.props;
+    const { bookId, books, loading, error, onAddedToCart } = this.props;
 
     if (loading) {
       return <Spinner />;
@@ -53,12 +45,7 @@ class BookPageContainer extends Component {
     }
 
     return (
-      <BookPage
-        bookId={bookId}
-        books={books}
-        onAddedToCart={onAddedToCart}
-        onSelectedBook={onSelectedBook}
-      />
+      <BookPage bookId={bookId} books={books} onAddedToCart={onAddedToCart} />
     );
   }
 }
@@ -76,7 +63,6 @@ const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
     fetchBooks: () => dispatch(fetchBooks(bookstoreService)()),
     onAddedToCart: (id) => dispatch(bookAddedToCart(id)),
-    onSelectedBook: (id) => dispatch(setSelectedBookId(id)),
   };
 };
 
