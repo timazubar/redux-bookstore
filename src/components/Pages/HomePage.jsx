@@ -1,14 +1,14 @@
-import React from "react";
-import { Container } from "react-bootstrap";
-import styled from "styled-components";
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import styled from 'styled-components';
 
-import BookList from "../BookList";
-import ShoppingCartTable from "../ShoppingCartTable";
+import BookListContainer from '../BookListContainer';
+import ShoppingCartTable from '../ShoppingCartTable';
 
 const HomePage = () => {
   return (
     <StyledBookListWrapper>
-      <BookList />
+      <BookListContainer />
       <ShoppingCartTable />
     </StyledBookListWrapper>
   );

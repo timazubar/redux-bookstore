@@ -1,4 +1,4 @@
-import { booksLoaded, booksRequested, booksError } from './bookListActions';
+import { fetchBooks } from './bookListActions';
 import {
   bookAddedToCart,
   bookRemovedFromCart,
@@ -6,18 +6,10 @@ import {
 } from './shoppingCartActions';
 import { setSelectedBookId } from './bookPageActions';
 
-const fetchBooks = (bookstoreService) => () => (dispatch) => {
-  dispatch(booksRequested());
-  bookstoreService
-    .getBooks()
-    .then((data) => dispatch(booksLoaded(data)))
-    .catch((err) => dispatch(booksError(err)));
-};
-
 export {
   fetchBooks,
+  setSelectedBookId,
   bookAddedToCart,
   bookRemovedFromCart,
   allBooksRemovedFromCart,
-  setSelectedBookId,
 };
