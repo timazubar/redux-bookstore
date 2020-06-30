@@ -13,9 +13,8 @@ import withBookstoreService from '../withBookstoreService';
 const BookPage = ({ books, bookId, onAddedToCart, onSelectedBook }) => {
   const renderBook = (bookId) => {
     const book = books.find((book) => book.id === bookId);
-    console.log(bookId);
     return (
-      <StyledCard key={bookId}>
+      <StyledCard key={book.id}>
         <BookListItem
           bookId={bookId}
           book={book}

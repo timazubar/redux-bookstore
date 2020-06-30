@@ -5,7 +5,7 @@ const renderBook = (state, action) => {
         bookId: action.payload,
       };
     default:
-      return state.bookPage;
+      return state;
   }
 };
 
