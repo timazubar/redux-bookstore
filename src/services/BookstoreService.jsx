@@ -46,13 +46,13 @@ export default class BookstoreService {
     }
   };
 
-  getBookId() {
+  getBookById(id) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (Math.random() > 0.99) {
           reject(new Error('err'));
         } else {
-          resolve(this.findId(this.data));
+          resolve(this.data.find((book) => book.id === this.findId(this.data)));
         }
       }, 1000);
     });
