@@ -37,4 +37,24 @@ export default class BookstoreService {
       }, 1000);
     });
   }
+
+  findId = (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === 'id') {
+        return arr[i].value;
+      }
+    }
+  };
+
+  getBookId() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.99) {
+          reject(new Error('err'));
+        } else {
+          resolve(this.findId(this.data));
+        }
+      }, 1000);
+    });
+  }
 }

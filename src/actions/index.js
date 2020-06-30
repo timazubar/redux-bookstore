@@ -1,5 +1,5 @@
 import { fetchBooks } from './bookListActions';
-import { bookRendered, bookRequested, bookError } from './bookPageActions';
+import { selectBookById } from './bookPageActions';
 import {
   bookAddedToCart,
   bookRemovedFromCart,
@@ -8,10 +8,8 @@ import {
 
 export {
   fetchBooks,
+  selectBookById,
   bookAddedToCart,
   bookRemovedFromCart,
   allBooksRemovedFromCart,
-  bookRendered,
-  bookRequested,
-  bookError,
 };
