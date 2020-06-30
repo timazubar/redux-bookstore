@@ -3,28 +3,30 @@ import { connect } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import { fetchBooks, bookAddedToCart } from '../../actions';
+import { fetchBooks, bookAddedToCart, setSelectedBookId } from '../../actions';
 import BookListItem from '../BookListItem';
 import { compose } from '../../utils';
 import ErrorIndicator from '../ErrorIndicator';
 import Spinner from '../Spinner';
 import withBookstoreService from '../withBookstoreService';
 
-const BookPage = ({ books, onAddedToCart }) => {
+const BookPage = ({ books, bookId, onAddedToCart, onSelectedBook }) => {
   const renderBook = (bookId) => {
     const book = books.find((book) => book.id === bookId);
+    console.log(bookId);
     return (
-      <StyledCard key={book.id}>
+      <StyledCard key={bookId}>
         <BookListItem
           bookId={bookId}
           book={book}
           onAddedToCart={() => onAddedToCart(book.id)}
+          onSelectedBook={() => onSelectedBook(book.id)}
         />
       </StyledCard>
     );
   };
 
-  return <>{renderBook(books[0].id)}</>;
+  return <>{renderBook(bookId)}</>;
 };
 
 class BookPageContainer extends Component {
@@ -33,7 +35,14 @@ class BookPageContainer extends Component {
   }
 
   render() {
-    const { books, loading, error, onAddedToCart } = this.props;
+    const {
+      bookId,
+      books,
+      loading,
+      error,
+      onAddedToCart,
+      onSelectedBook,
+    } = this.props;
 
     if (loading) {
       return <Spinner />;
@@ -43,7 +52,14 @@ class BookPageContainer extends Component {
       return <ErrorIndicator />;
     }
 
-    return <BookPage books={books} onAddedToCart={onAddedToCart} />;
+    return (
+      <BookPage
+        bookId={bookId}
+        books={books}
+        onAddedToCart={onAddedToCart}
+        onSelectedBook={onSelectedBook}
+      />
+    );
   }
 }
 
@@ -52,14 +68,15 @@ const StyledCard = styled(Card)`
   margin: 1rem;
 `;
 
-const mapStateToProps = ({ bookList: { books, loading, error } }) => {
-  return { books, loading, error };
+const mapStateToProps = ({ bookPage: { bookId }, bookList: { books } }) => {
+  return { bookId, books };
 };
 
 const mapDispatchToProps = (dispatch, { bookstoreService }) => {
   return {
     fetchBooks: () => dispatch(fetchBooks(bookstoreService)()),
     onAddedToCart: (id) => dispatch(bookAddedToCart(id)),
+    onSelectedBook: (id) => dispatch(setSelectedBookId(id)),
   };
 };
 
