@@ -1,28 +1,22 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import BookList from './BookList';
+import BookstoreService from '../services/BookstoreService';
 import { bookAddedToCart, fetchBooks } from '../actions';
-// import { compose } from '../utils';
 import ErrorIndicator from './ErrorIndicator';
 import Spinner from './Spinner';
-// import withBookstoreService from './withBookstoreService';
 
 const BookListContainer = () => {
   const dispatch = useDispatch();
-
-  const fetchBooksWithService = useCallback(
-    (bookstoreService) => dispatch(fetchBooks(bookstoreService)()),
-    [dispatch]
-  );
 
   const onAddedToCartWithDispatch = (id) => dispatch(bookAddedToCart(id));
 
   const { books, loading, error } = useSelector((state) => state.bookList);
 
   useEffect(() => {
-    fetchBooksWithService();
-  }, [fetchBooksWithService]);
+    dispatch(fetchBooks(BookstoreService));
+  }, [dispatch]);
 
   if (loading) {
     return <Spinner />;
